@@ -6,12 +6,14 @@
 	<meta name="description" content="Project IA">
 	<meta name="author" content="Norwin Guerrero Cruz">
 
-	<title>Inicio - Sistema de consulta a pasientes - SCP</title>
+	<title> @yield('titulo') </title>
 
 	<!-- Bootstrap core CSS -->
 	{{ HTML::style('css/bootstrap.css') }}   
 	<!--external css-->
-	{{ HTML::style('font-awesome/css/font-awesome.css') }}   
+	{{ HTML::style('font-awesome/css/font-awesome.css') }} 
+  {{ HTML::style('css/chosen.min.css') }} 
+   
 
 
 	<!-- Custom styles for this template -->
@@ -59,18 +61,18 @@
               	  	
                   <li class="sub-menu">
                       <a href="javascript:;">
-                          <i class="fa fa-dashboard"></i>
+                          <i class="fa fa-stethoscope"></i>
                           <span>Consultas</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="#">Agregar</a></li>
+                          <li><a  href="{{ URL::to('consulta') }}">Agregar</a></li>
                           <li><a  href="#">Buscar</a></li>                          
                       </ul>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
+                         <i class="fa fa-users"></i>
                           <span>Pasientes</span>
                       </a>
                       <ul class="sub">
@@ -82,7 +84,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
-                          <span>Components</span>
+                          <span>Configuracion</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="calendar.html">Cuenta</a></li>
@@ -91,7 +93,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class=" fa fa-bar-chart-o"></i>
-                          <span>Charts</span>
+                          <span>Estatisticas</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="morris.html">Morris</a></li>
@@ -136,10 +138,12 @@
   {{ HTML::script('js/jquery.scrollTo.min.js') }}
   {{ HTML::script('js/jquery.nicescroll.js') }}
 
-
+  
 
   <!--common script for all pages-->
   {{ HTML::script('js/common-scripts.js') }}
+  {{ HTML::script('js/jquery.mask.min.js') }}
+  {{ HTML::script('js/main.js') }}
 
   <!--script for this page-->
   

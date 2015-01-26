@@ -23,6 +23,26 @@ Route::group(array('before' => 'auth'), function()
 			//http://localhost/iaproject/public/api/doctores
 		});
 	});
+
+	Route::group(array('prefix' => 'consulta'), function () {
+		Route::get('/', function(){
+			return View::make('sistem.consulta.addconsulta');
+		});
+		Route::post('save', 'ConsultasController@save');
+		Route::get('buscar/{tag}', function($tag){
+		    if(Request::ajax()){
+			 	$consultas = DB::table('consultas')->where('sintomas', 'LIKE', '%'.$tag.'%')->get();
+			 	return Response::json(array(
+				 	'consultas' =>     $consultas
+		        ));
+			}
+		});
+	});
+	
+	Route::group(array('prefix' => 'paciente'), function () {
+		Route::post('save', 'PacientesController@save');
+	});
+
 });	
 
 Route::get('login', function(){
@@ -30,16 +50,32 @@ Route::get('login', function(){
 });
 
 Route::post('login', function(){
-	$userdata = array(
-		'username' =>Input::get('username'),
-		'password' =>Input::get('password')
-	);
-	if(Auth::attempt($userdata)){
-		return Redirect::to('/');
+
+	$rules = array(
+		'username' => 'required',
+		'password' => 'required',
+		);
+	$message = array(
+			'required' => 'El campo :attribute es requerido',
+			);
+
+	$validate = Validator::make(Input::all(), $rules, $message);
+
+	if($validate->fails()){
+		return Redirect::back()->withErrors($validate)->withInput();
 	}else{
-		Session::flash('message', 'Error al iniciar session');
-		return Redirect::to('login');
-	}
+
+		$userdata = array(
+			'username' =>Input::get('username'),
+			'password' =>Input::get('password')
+		);
+		if(Auth::attempt($userdata)){
+			return Redirect::to('/');
+		}else{
+			Session::flash('message', 'Error al iniciar session');
+			return Redirect::to('login');
+		}
+	}	
 });
 
 Route::get('logout',function(){

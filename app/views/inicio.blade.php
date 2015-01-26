@@ -1,4 +1,7 @@
 @extends('templates.maintemplate')
+@section('titulo')
+  Inicio - Sistema de consulta a pasientes - SCP
+@stop
 @section('contenido')
 <section class="wrapper">
 	<div class="row">

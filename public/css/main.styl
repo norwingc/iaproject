@@ -2,12 +2,15 @@ azulocuro = #062f3c
 azul = #2b82ad
 amarillo = #ffcc33
 verde = #83b81a
-
+textarea
+	resize none
 .black-bg
 	background azul !important
 	color white !important
 	border-bottom 1px solid azul !important
-
+.chosen-container-single 
+	.chosen-single
+		height 34px !important
 .top-menu
 	ul
 		li
@@ -21,4 +24,61 @@ verde = #83b81a
 	transition all 2s ease			
 .site-footer				
 	background verde !important
+	
+.addpaciente	
+	position relative
+	.icoaddpaciente
+		position absolute
+		top -4px
+		right -19px
+		transition all 1s ease
+		&:hover			
+			right -155px
+		a
+			font-size 1.2em
+			i
+				font-size 2.6em
+				
+.prediccion
+	position absolute
+	top -71 px	
+	label
+		vertical-align text-bottom
+		font-size 1.2em
+		padding 0 5px
+		
+.no-visible					
+	margin-left -437px !important
+.si-visible
+	margin-left -10px !important
+	
+#cuadroprediccion
+	transition all 2s ease
+	width 100%
+	margin-top 42px
+	height 250px
+#mostrarprediccion	
+	transition all 2s ease
+	
+.boton_prediccion
+	position absolute
+	bottom -40%
+	left -10px	
+	transition all 2s ease	
+				
+.cuadro
+	border-bottom 1px solid #eff2f7
+	p
+		margin 0
+	a
+		text-align right	
+.vertodos
+	padding 7px
+	font-size 1.2em
+	text-align center	
+
+.btn_google	
+	background white
+	border none
+	color #428bca
 	

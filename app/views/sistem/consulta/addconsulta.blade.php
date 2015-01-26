@@ -3,15 +3,17 @@
   Consultas - Sistema de consulta a pasientes - SCP
 @stop
 @section('contenido')
+<section class="wrapper site-min-height">
 @if(Session::has('message'))
 	<div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
-<section class="wrapper site-min-height">
 	<h3><i class="fa fa-angle-right"></i>Agregar Consulta</h3>  
 		
 	<div class="row mt">
   		<div class="col-lg-8" style="z-index: 9">
          	<div class="form-panel">
+         	{{ HTML::ul($errors->all(), array('class' =>'bg-danger')) }}
+
          		{{ Form::open(array('url' => 'consulta/save', 'class' => 'form-horizontal style-form')) }}             	
                   	<div class="form-group addpaciente">
 	                	<label class="col-sm-2 col-sm-2 control-label">Paciente</label>
@@ -37,7 +39,7 @@
                   	<div class="form-group">
                   		<label class="col-sm-2 col-sm-2 control-label">Tratamiento</label>
               			<div class="col-sm-10">
-              				{{ Form::textarea('tratamiento', Input::old('tratamiento'), array('class' => 'form-control', 'placeholder'=> 'Tratamiento del Paciente')) }}  	
+              				{{ Form::textarea('tratamiento', Input::old('tratamiento'), array('class' => 'form-control', 'placeholder'=> 'Tratamiento del Paciente', 'id' => 'tratamiento')) }}  	
               			</div>
                   	</div>
                   	<div class="form-group">
@@ -49,7 +51,7 @@
   		<div class="col-lg-4">  			
 			<div class="row mt prediccion">
 				<div class="col-sm-12 text-center">
-					<label class="control-label">Activar Predicciones</label>
+					<label class="control-label">Activar Predicción de tratamiento</label>
 					<div class="switch switch-square" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
 						<input type="checkbox" id="prediccion" checked/>
 					</div>
@@ -62,7 +64,10 @@
 					</div>
 
 					<div class="cuadro vertodos">
-						<a href="" target="new">Ver todos...</a>
+						{{ Form::open(array('url' => 'consulta/view/tag', 'class' => 'form-horizontal style-form', 'target' => '_blank')) }}             							
+							<input type="hidden" name="q" id="input_vertodos" /> 							 
+							<input name="btnG" value="Ver Todos..." class="btn_google"  id="btn_vertodos" type="submit" />
+						{{ Form::close() }}
 					</div>
 					<div class="cuadro vertodos">
 						<form method="get" action="http://www.google.com/search" target="_blank">
@@ -121,6 +126,19 @@
 				    	{{ Form::submit('Agregar Paciente' , array('class'=> 'btn btn-primary')) }}
 				    </div>
 		   		{{ Form::close() }} 		   	
+		    </div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalconsulta">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
+      		</div>
+      		<div class="modal-body">
+		       	   	
 		    </div>
 		</div>
 	</div>

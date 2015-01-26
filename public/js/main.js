@@ -31,13 +31,15 @@ function main(){
 		               
 		            },
 		            success: function (data) {
-		            	var consulta = ''; 
-		            	var url = '#';
+		            	var consulta = ''; 		            	
 		            	for(datos in data.consultas){
+		            		var url = 'consulta/search/'+data.consultas[datos].id;
+		            		var sintomas = data.consultas[datos].sintomas;
+		            		var tratamiento = data.consultas[datos].tratamiento;
 
 		            		 consulta += "<div class='cuadro'>" + 
-		            		 				"<p>sintomas: " +  data.consultas[datos].sintomas + "</p>" +
-		            		 				"<p>tratamiento: " +  data.consultas[datos].tratamiento + "</p>" +
+		            		 				"<p>sintomas: " +  sintomas.slice(0,50) + "...</p>" +
+		            		 				"<p>tratamiento: " +  tratamiento.slice(0,50) + "...</p>" +
 		            		 				"<a href='"+ url +"'  target='new'>Leer mas..</a>"
 		            		 			 +"</div>";	
 		            	}
@@ -57,5 +59,19 @@ function main(){
 	$('#btn_google').click(function(){	
 		$('#busqueda_google').val('tratamiento ' + $('#sintomas_google').val());		
 	});
+	$('#btn_vertodos').click(function(){	
+		$('#input_vertodos').val($('#sintomas_google').val());		
+	});
+	var tratamiento = '';
+	$('#add_tratamiento').click(function(){
+		tratamiento = $('#tratamiento_descripcion').val();
+		ver(tratamiento);
+		close();
+	});
+}
+
+function ver(tratamiento){	
+	$('#tratamiento').val(tratamiento);
+	console.log(tratamiento);
 }
 

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'datos',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql' => array(
+		'datos' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'iaproject',
@@ -62,6 +62,17 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
+
+		'conocimiento' => array(
+	         'driver'    => 'mysql',
+	         'host'      => 'localhost',
+	         'database'  => 'conocimiento_ia',
+	         'username'  => 'root',
+	         'password'  => '',
+	         'charset'   => 'utf8',
+	         'collation' => 'utf8_unicode_ci',
+	         'prefix'    => '',
+      	),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

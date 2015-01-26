@@ -10,11 +10,14 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('test', function(){
+	return $consultas = Consulta::all()->take(3);;
+});
 Route::group(array('before' => 'auth'), function()
 {
-	Route::get('/', function()
-	{
-		return View::make('inicio');
+	Route::get('/', function(){	
+		$consultas = Consulta::where('doctor_id', Auth::user()->id)->take(3)->get();
+		return View::make('inicio')->with('consultas', $consultas);
 	});
 
 	Route::group(array('prefix' => 'api'), function () {
@@ -23,6 +26,10 @@ Route::group(array('before' => 'auth'), function()
 			//http://localhost/iaproject/public/api/doctores
 		});
 	});
+
+	/**
+	 * CONSULTAS
+	 */
 
 	Route::group(array('prefix' => 'consulta'), function () {
 		Route::get('/', function(){
@@ -37,9 +44,36 @@ Route::group(array('before' => 'auth'), function()
 		        ));
 			}
 		});
+		Route::get('view', function(){
+			$consultas = Consulta::where('doctor_id', Auth::user()->id)->get();
+			return View::make('sistem.consulta.consulta')->with('consultas', $consultas);
+		});
+		Route::post('view/tag', function(){
+			$consultas = Consulta::where('sintomas', 'LIKE', '%' .Input::get('q'). '%')->get();
+			return View::make('sistem.consulta.view',array('tag'=>Input::get('q'), 'consultas'=>$consultas));
+		});
+		Route::get('search/{id}', function($id){
+			$consulta = Consulta::find($id);
+			return View::make('sistem.consulta.search')->with('consulta', $consulta);
+		});
 	});
 	
+	/**
+	 * PACIENTES
+	 */
+
 	Route::group(array('prefix' => 'paciente'), function () {
+		Route::get('/', function(){
+			return View::make('sistem.paciente.addpaciente');
+		});
+		Route::get('view', function(){
+			$pacientes = Paciente::all();
+			return View::make('sistem.paciente.view')->with('pacientes', $pacientes);
+		});
+		Route::get('search/{id}', function($id){
+			$paciente = Paciente::find($id);
+			return View::make('sistem.paciente.search')->with('paciente', $paciente);
+		});
 		Route::post('save', 'PacientesController@save');
 	});
 

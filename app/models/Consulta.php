@@ -3,6 +3,7 @@
 		protected $guarded = array();
 		public static $rules = array();
 		protected $table = 'consultas';
+  		protected $connection = 'datos';
 	}
 ?>
 

@@ -10,6 +10,7 @@
 
 	<!-- Bootstrap core CSS -->
 	{{ HTML::style('css/bootstrap.css') }}   
+  {{ HTML::style('css/dataTables.bootstrap.css') }} 
 	<!--external css-->
 	{{ HTML::style('font-awesome/css/font-awesome.css') }} 
   {{ HTML::style('css/chosen.min.css') }} 
@@ -56,7 +57,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="#"><img src="{{asset('img/avatar.jpg')}}" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="{{ URL::to('/') }}"><img src="{{asset('img/avatar.jpg')}}" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">{{ Auth::user()->username }}</h5>
               	  	
                   <li class="sub-menu">
@@ -66,7 +67,7 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="{{ URL::to('consulta') }}">Agregar</a></li>
-                          <li><a  href="#">Buscar</a></li>                          
+                          <li><a  href="{{ URL::to('consulta/view') }}">Buscar</a></li>                          
                       </ul>
                   </li>
 
@@ -76,8 +77,8 @@
                           <span>Pasientes</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="#">Agregar</a></li>
-                          <li><a  href="#">Buscar</a></li>
+                          <li><a  href="{{ URl::to('paciente') }}">Agregar</a></li>
+                          <li><a  href="{{ URl::to('paciente/view') }}">Buscar</a></li>
                       </ul>
                   </li>
 
@@ -144,6 +145,9 @@
   {{ HTML::script('js/common-scripts.js') }}
   {{ HTML::script('js/jquery.mask.min.js') }}
   {{ HTML::script('js/main.js') }}
+
+  {{ HTML::script('js/jquery.dataTables.min.js') }}
+  {{ HTML::script('js/dataTables.bootstrap.js') }}
 
   <!--script for this page-->
   

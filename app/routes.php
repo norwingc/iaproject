@@ -16,7 +16,7 @@ Route::get('test', function(){
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/', function(){	
-		$consultas = Consulta::where('doctor_id', Auth::user()->id)->take(3)->get();
+		$consultas = Consulta::where('doctor_id', Auth::user()->id)->orderBy('id','des')->take(3)->get();
 		return View::make('inicio')->with('consultas', $consultas);
 	});
 
@@ -38,7 +38,7 @@ Route::group(array('before' => 'auth'), function()
 		Route::post('save', 'ConsultasController@save');
 		Route::get('buscar/{tag}', function($tag){
 		    if(Request::ajax()){
-			 	$consultas = DB::table('consultas')->where('sintomas', 'LIKE', '%'.$tag.'%')->get();
+			 	$consultas = DB::table('consultas')->where('sintomas', 'LIKE', '%'.$tag.'%')->orderBy('id','des')->take(3)->get();
 			 	return Response::json(array(
 				 	'consultas' =>     $consultas
 		        ));

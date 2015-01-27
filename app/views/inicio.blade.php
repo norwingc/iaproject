@@ -58,11 +58,7 @@
 			</div><!-- /row -->
 		</div><!-- /col-lg-9 END SECTION MIDDLE -->
 	              
-	              
-	  <!-- **********************************************************************************************************************************************************
-	  RIGHT SIDEBAR CONTENT
-	  *********************************************************************************************************************************************************** -->                  
-	              
+	                 
 		<div class="col-lg-3 ds">
 	        <!--COMPLETED ACTIONS DONUTS CHART-->
 			<h3>Ultimas Consultas</h3>
@@ -85,9 +81,7 @@
 					  	</div>
 					</a>  	
 				</div>
-			@endforeach	
-
-
+			@endforeach
           
             <div id="calendar" class="mb">
                 <div class="panel green-panel no-margin">
@@ -105,16 +99,16 @@
 	 
 
 
-	@stop
-	@section('js')
-	{{ HTML::script('js/zabuto_calendar.js') }}
-	<script type="application/javascript">
-        $(document).ready(function () {        
-            $("#my-calendar").zabuto_calendar({
-           		language: "es",
-    			year: 2015,
-    			today: true,
-        	});
-         });	
-	</script>
-	@stop
+@stop
+@section('js')
+{{ HTML::script('js/zabuto_calendar.js') }}
+<script type="application/javascript">
+    $(document).ready(function () {        
+        $("#my-calendar").zabuto_calendar({
+       		language: "es",
+			year: 2015,
+			today: true,
+    	});
+     });	
+</script>
+@stop

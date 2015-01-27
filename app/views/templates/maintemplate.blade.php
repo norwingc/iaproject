@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="Project IA">
 	<meta name="author" content="Norwin Guerrero Cruz">
 
@@ -28,10 +32,10 @@
 
 </head>
 <body>
-	<section id="container" >
-		<!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+	<section id="container" >		
       <!--header start-->
       <header class="header black-bg">
       	<div class="sidebar-toggle-box">
@@ -47,10 +51,7 @@
       	</div>
       </header>
       <!--header end-->
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
+      
       <!--sidebar start-->
       <aside class="animar">
           <div id="sidebar"  class="nav-collapse ">
@@ -88,18 +89,14 @@
                           <span>Configuracion</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Cuenta</a></li>
+                          <li><a  href="#">Cuenta</a></li>
                       </ul>
                   </li> 
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
+                  <li>
+                      <a href="{{ URL::to('estadisticas') }}" >
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>Estatisticas</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
-                      </ul>
+                      </a>                      
                   </li>
 
               </ul>
@@ -108,16 +105,13 @@
       </aside>
       <!--sidebar end-->
 
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
         @yield('contenido')
           
-      </section><!-- /MAIN CONTENT -->
-
+      </section>
       <!--main content end-->
+
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
@@ -130,7 +124,7 @@
       <!--footer end-->
   	</section>
 
-  <!-- js placed at the end of the document so the pages load faster -->
+  
   {{ HTML::script('js/jquery.js') }}
   {{ HTML::script('js/bootstrap.min.js') }}
   {{ HTML::script('js/jquery-ui-1.9.2.custom.min.js') }}
@@ -138,10 +132,7 @@
   {{ HTML::script('js/jquery.dcjqaccordion.2.7.js') }}
   {{ HTML::script('js/jquery.scrollTo.min.js') }}
   {{ HTML::script('js/jquery.nicescroll.js') }}
-
   
-
-  <!--common script for all pages-->
   {{ HTML::script('js/common-scripts.js') }}
   {{ HTML::script('js/jquery.mask.min.js') }}
   {{ HTML::script('js/main.js') }}
@@ -149,11 +140,9 @@
   {{ HTML::script('js/jquery.dataTables.min.js') }}
   {{ HTML::script('js/dataTables.bootstrap.js') }}
 
-  <!--script for this page-->
+  
   
   @yield('js')
-  
-
 
 </body>
 </html>

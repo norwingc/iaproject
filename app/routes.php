@@ -74,7 +74,22 @@ Route::group(array('before' => 'auth'), function()
 			$paciente = Paciente::find($id);
 			return View::make('sistem.paciente.search')->with('paciente', $paciente);
 		});
+		Route::get('expediente/{id}', function($id){
+			$paciente = Paciente::find($id);
+			$html = View::make("expediente")->with('paciente', $paciente);
+		    return PDF::load($html, 'carta', 'portrait')->show();
+		});
 		Route::post('save', 'PacientesController@save');
+	});
+
+	/**
+	 * ESTADISTICAS
+	 */
+
+	Route::group(array('prefix' => 'estadisticas'), function () {
+		Route::get('/', function(){
+			return View::make('sistem.estadisticas.estadisticas');
+		});
 	});
 
 });	

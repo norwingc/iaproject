@@ -38,6 +38,7 @@
 			        </tbody>    
 	  	  	 	</table>
 	  	  	</div>
+	  	  	<a href="{{ URL::to('paciente/expediente/'. $paciente->id) }}" class="btn btn-primary" style="margin-top:1em" target="new">Descargar Expediente del Paciente</a>
 	  	</div>  
   	</div>
 

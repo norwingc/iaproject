@@ -89,7 +89,7 @@
                           <span>Configuracion</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="#">Cuenta</a></li>
+                          <li><a  href="{{ URL::to('usuarios/cuenta') }}">Cuenta</a></li>
                       </ul>
                   </li> 
                   <li>
@@ -97,6 +97,16 @@
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>Estatisticas</span>
                       </a>                      
+                  </li>
+                  <li class="sub-menu">
+                       <a href="javascript:;" >
+                          <i class="fa fa-user"></i>
+                          <span>Usuarios</span>
+                      </a>  
+                      <ul class="sub">
+                          <li><a  href="{{ URl::to('usuarios') }}">Agregar</a></li>
+                          <li><a  href="{{ URl::to('usuarios/view') }}">Buscar</a></li>
+                      </ul>                    
                   </li>
 
               </ul>

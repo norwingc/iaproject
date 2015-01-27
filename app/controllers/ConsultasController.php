@@ -1,7 +1,11 @@
 <?php
 
 class ConsultasController extends BaseController {
-
+	
+	/**
+	 * [save description]
+	 * @return [type] [description]
+	 */
 	public function save(){
 
 		$rules	= array(

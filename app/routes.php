@@ -92,6 +92,26 @@ Route::group(array('before' => 'auth'), function()
 		});
 	});
 
+	/**
+	 * USUARIOS	
+	 */
+
+	Route::group(array('prefix' => 'usuarios'), function () {
+		Route::get('/', function(){
+			return View::make('sistem.usuarios.addusuarios');
+		});
+		Route::get('view', function(){
+			$user = User::all();
+			return View::make('sistem.usuarios.view')->with('user', $user);
+		});
+		Route::get('cuenta', function(){
+			$user = User::where('id', Auth::user()->id)->first();
+			return View::make('sistem.usuarios.cuenta')->with('user', $user);
+		});
+		Route::post('save','UsuariosController@save');
+		Route::post('update','UsuariosController@update');
+	});
+
 });	
 
 Route::get('login', function(){

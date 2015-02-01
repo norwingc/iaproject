@@ -6,33 +6,80 @@ class PacientesController extends BaseController {
 	 * @return [type] [description]
 	 */
 	public function save(){
+		 if(Request::ajax()){
 
-		$rules	= array(
-			'nombre' => 'required',
-			'apellido' => 'required',
-			'direccion' => 'required',	
-			'cedula' => 'required|unique:pacientes',	
+		 	$registerData = array(
+			            'nombre'    				=>    Input::get('nombre'),
+			            'edad' 						=>    Input::get('edad'),
+			            'sexo'   	 				=>    Input::get('sexo'),
+			            'ocupacion'    				=>    Input::get('ocupacion'),
+			            'nacionalidad'    			=>    Input::get('nacionalidad'),
+			            'estado_civil'   			=>    Input::get('estado_civil'),
+			            'direccion'    				=>    Input::get('direccion'),
+			            'cedula'    				=>    Input::get('cedula'),
+			            'responsable'    			=>    Input::get('responsable'),
+			            'ingreso'    				=>    Input::get('ingreso'),
+			            'antecedentes_drop'    		=>    Input::get('antecedentes_drop'),
+			            'antecedentes'				=>    Input::get('antecedentes'),
+			            'infancia'   				=>    Input::get('infancia'),
+			            'intervencion'    			=>    Input::get('intervencion'),
+			            'traumatismo'    			=>    Input::get('traumatismo'),
+			            'transfuciones'   		 	=>    Input::get('transfuciones'),
+			            'medicamentos'    			=>    Input::get('medicamentos'),
+			            'personales_patologicos'    =>    Input::get('personales_patologicos'),
+			            'habitos'    				=>    Input::get('habitos'),
+			            'tabaquismo'    			=>    Input::get('tabaquismo'),
+			            'toxicomanias'   			=>    Input::get('toxicomanias'),
+			            'deportes'    				=>    Input::get('deportes'),
+			        );
+
+			$rules	= array(
+						'nombre'    				=>    'required',
+			            'edad' 						=>    'required',
+			            'sexo'   	 				=>    'required',
+			            'ocupacion'    				=>    'required',
+			            'nacionalidad'    			=>    'required',
+			            'estado_civil'   			=>    'required',
+			            'direccion'    				=>    'required',
+			            'cedula'    				=>    'required|unique:pacientes',
+			            'responsable'    			=>    'required',
+			            'ingreso'    				=>    'required',
+			            'antecedentes_drop'    		=>    'required',
+			            'antecedentes'				=>    'required',
+			            'infancia'   				=>    'required',
+			            'intervencion'    			=>    'required',
+			            'traumatismo'    			=>    'required',
+			            'transfuciones'   		 	=>    'required',
+			            'medicamentos'    			=>    'required',
+			            'personales_patologicos'    =>    'required',
+			            'habitos'    				=>    'required',
+			            'tabaquismo'    			=>    'required',
+			            'toxicomanias'   			=>    'required',
+			            'deportes'    				=>    'required',
+						);
+			$message = array(
+				'required' => 'El campo :attribute es requerido',				
 			);
-		$message = array(
-			'required' => 'El campo :attribute es requerido',				
-		);
 
 
-		$validate = Validator::make(Input::all(), $rules, $message);
+			$validate = Validator::make(Input::all(), $rules, $message);
 
-		if($validate->fails()){
-			return Redirect::back()->withErrors($validate)->withInput();
-		}else{
+			if($validate->fails()){
+				 return Response::json(array(
+	                'success' => false,
+	                'errors' => $validate->getMessageBag()->toArray()
+	            )); 
+			}else{
+				$paciente = new Paciente($registerData);
+				$paciente->save();
 
-			$paciente = new Paciente();
-			$paciente->nombre = Input::get('nombre');
-			$paciente->apellido = Input::get('apellido');
-			$paciente->direccion = Input::get('direccion');
-			$paciente->cedula = Input::get('cedula');
-
-			$paciente->save();
-
-			return Redirect::back();
+				if($paciente){
+					 return Response::json(array(
+	                    'success'         =>     true,
+	                    'message'         =>     'Te has registrado correctamente'
+	                ));
+				}				
+			}
 		}
 	}
 }

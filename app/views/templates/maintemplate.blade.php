@@ -42,7 +42,7 @@
       		<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       	</div>
       	<!--logo start-->
-      	<a href="{{ URL::to('/') }}" class="logo"><b>Sistema de consulta a pasientes - SCP</b></a>
+      	<a href="{{ URL::to('/') }}" class="logo"><b>Sistema de Consulta a Pacientes - SCP</b></a>
       	<!--logo end-->
       	<div class="top-menu">
       		<ul class="nav pull-right top-menu">

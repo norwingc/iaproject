@@ -68,10 +68,73 @@ function main(){
 		ver(tratamiento);
 		close();
 	});
+
+	$('#addpaciente').click(addPaciente);	
 }
 
 function ver(tratamiento){	
 	$('#tratamiento').val(tratamiento);
 	console.log(tratamiento);
+}
+
+function addPaciente(){	
+	var nombre = $('#nombre').val();
+	var edad = $('#edad').val();
+	var sexo = $('#sexo').val();
+	var ocupacion = $('#ocupacion').val();
+	var nacionalidad = $('#nacionalidad').val();
+	var estado_civil = $('#estado_civil').val();
+	var direccion = $('#direccion').val();
+	var cedula = $('#cedula').val();
+	var responsable = $('#responsable').val();
+	var ingreso = $('#ingreso').val();
+	var antecedentes_drop = '';
+	var antecedentes = $('#antecedentes').val();
+	var infancia = $('#infancia').val();
+	var intervencion = $('#intervencion').val();
+	var traumatismo = $('#traumatismo').val();
+	var transfuciones = $('#transfuciones').val();
+	var medicamentos = $('#medicamentos').val();
+	var personales_patologicos = $('#personales_patologicos').val();
+	var habitos = $('#habitos').val();
+	var tabaquismo = $('#tabaquismo').val();
+	var toxicomanias = $('#toxicomanias').val();
+	var deportes = $('#deportes').val();
+
+	$('#sortable2 li').each(function(){
+		if($(this).html() == 'Enfermedades'){
+
+		}else{
+			antecedentes_drop += $(this).html() + ', ';		
+		}		
+	});
+
+	var datos = 'nombre='+ nombre + '&edad='+ edad + '&sexo='+ sexo + '&ocupacion='+ ocupacion + '&nacionalidad='+ nacionalidad + '&estado_civil='+ estado_civil + '&direccion='+ direccion + '&cedula='+ cedula + '&responsable='+ responsable + '&ingreso='+ ingreso + '&antecedentes_drop='+ antecedentes_drop + '&antecedentes='+ antecedentes + '&infancia='+ infancia + '&intervencion='+ intervencion + '&traumatismo='+ traumatismo + '&transfuciones='+ transfuciones + '&medicamentos='+ medicamentos + '&personales_patologicos='+ personales_patologicos + '&habitos='+ habitos + '&tabaquismo='+ tabaquismo + '&toxicomanias='+ toxicomanias + '&deportes='+ deportes;
+	
+	$.ajax({
+		type: 'POST',
+    	url: 'paciente/save',
+    	data: datos,
+    	beforeSend: function(){
+           
+        },
+        success: function (data) {
+        	if(data.success == false){
+        		var errores = '';
+                for(datos in data.errors){
+                    errores += data.errors[datos];
+                }
+                console.log(errores);
+        	}else{
+				$('#form_paciente')[0].reset();//limpiamos el formulario
+				console.log(data.message);
+        	}
+        },
+        error: function(errors){
+            $('.before').hide();
+            $('.errors_form').html('');
+            $('.errors_form').html(errors);
+        }
+	});
 }
 

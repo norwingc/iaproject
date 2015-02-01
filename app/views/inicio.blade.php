@@ -76,7 +76,7 @@
 								$fecha = $value->created_at;									
 							?>  
 					  		<p><muted>{{ date_format($fecha, 'd-m-Y'); }}</muted><br/>
-					  		   <a href="{{ URL::to('paciente/view/'. $paciente->id) }}">{{ $paciente->nombre }}</a> {{ substr($value->sintomas, 0, 30); }}... <br/>
+					  		   <a href="{{ URL::to('paciente/search/'. $paciente->id) }}">{{ $paciente->nombre }}</a> {{ substr($value->sintomas, 0, 30); }}... <br/>
 					  		</p>
 					  	</div>
 					</a>  	

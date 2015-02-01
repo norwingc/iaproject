@@ -16,9 +16,27 @@ class CreatePacientesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('nombre');
-			$table->string('apellido');
+			$table->integer('edad');
+			$table->string('sexo');
+			$table->string('ocupacion');
+			$table->string('nacionalidad');
+			$table->string('estado_civil');
 			$table->string('direccion');
 			$table->string('cedula');
+			$table->string('responsable');
+			$table->string('ingreso');
+			$table->string('antecedentes_drop');
+			$table->string('antecedentes');
+			$table->string('infancia');
+			$table->string('intervencion');
+			$table->string('traumatismo');
+			$table->string('transfuciones');
+			$table->string('medicamentos');
+			$table->string('personales_patologicos');
+			$table->string('habitos');
+			$table->string('tabaquismo');
+			$table->string('toxicomanias');
+			$table->string('deportes');
 			$table->timestamps();
 		});
 	}

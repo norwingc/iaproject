@@ -69,11 +69,13 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('view', function(){
 			$pacientes = Paciente::all();
 			return View::make('sistem.paciente.view')->with('pacientes', $pacientes);
-		});
+		});		
 		Route::get('search/{id}', function($id){
 			$paciente = Paciente::find($id);
 			return View::make('sistem.paciente.search')->with('paciente', $paciente);
 		});
+		Route::post('search/update/{id}', 'PacientesController@update');
+
 		Route::get('expediente/{id}', function($id){
 			$paciente = Paciente::find($id);
 			$html = View::make("expediente")->with('paciente', $paciente);

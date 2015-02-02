@@ -9,11 +9,12 @@
 	@endif
 
 	<h3><i class="fa fa-angle-right"></i>Agregar Paciente</h3>  
+	<div class="alert alert-info hidden" id="msj"></div>
 
 	<div class="row mt">
   		<div class="col-lg-12" style="z-index: 9">
          	<div class="form-panel">
-         	{{ HTML::ul($errors->all(), array('class' =>'bg-danger')) }}
+         	<ul class="bg-danger" id="error"></ul>         	
          	 	{{ Form::open(array('url' => 'paciente/save', 'class' => 'form-horizontal style-form', 'id'=>'form_paciente')) }}
 					<h4><i class="fa fa-angle-right"></i>Ficha de Identificacion</h4>  
          	 		<div class="form-group">

@@ -11,11 +11,11 @@
 		
 	<div class="row mt">
   		<div class="col-lg-8" style="z-index: 9">
-         	<div class="form-panel">
+         	<div class="form-panel addpaciente">
          	{{ HTML::ul($errors->all(), array('class' =>'bg-danger')) }}
 
          		{{ Form::open(array('url' => 'consulta/save', 'class' => 'form-horizontal style-form')) }}             	
-                  	<div class="form-group addpaciente">
+                  	<div class="form-group">
 	                	<label class="col-sm-2 col-sm-2 control-label">Paciente</label>
 	                  	<div class="col-sm-10" style="z-index: 9">
 	                  		<?php $pacientes = Paciente::all(); ?>
@@ -34,24 +34,42 @@
 						</div>
                   	</div> 
                   	<div class="form-group">
-                  		<label class="col-sm-2 col-sm-2 control-label">Sintomas</label>
+                  		<label class="col-sm-2 control-label">Sintomas</label>
               			<div class="col-sm-10">
               				{{ Form::textarea('sintomas', Input::old('sintomas'), array('class' => 'form-control', 'placeholder'=> 'Sintomas del Paciente', 'id' =>'sintomas_google')) }}  	
-              			</div>
+              				<div style="text-align:right; margin-top: 10px">
+	                    		<a class="btn btn-primary" data-toggle="modal" href="#" data-target="#modalsintomas">Ver Todos Los sintomas</a>
+	                    	</div>	
+              			</div>              			
                   	</div>
                   	<div class="form-group">
-                  		<label class="col-sm-2 col-sm-2 control-label">Tratamiento</label>
+                  		<label class="col-sm-2 control-label">Descripcion</label>
+              			<div class="col-sm-10">
+              				{{ Form::textarea('descripcion', Input::old('descripcion'), array('class' => 'form-control', 'placeholder'=> 'Descripcion de los sintomas')) }}  	
+              			</div>              			
+                  	</div>
+                  	<div class="form-group">
+                  		<label class="col-sm-2 control-label">Tratamiento</label>
               			<div class="col-sm-10">
               				{{ Form::textarea('tratamiento', Input::old('tratamiento'), array('class' => 'form-control', 'placeholder'=> 'Tratamiento del Paciente', 'id' => 'tratamiento')) }}  	
-              			</div>
+              				<div style="text-align:right; margin-top: 10px">
+	                    		<a class="btn btn-primary" data-toggle="modal" href="#" id="tratamiento_sugerido">Ver Tratamiento sugerido</a>
+	                    	</div>	 
+              			</div> 
                   	</div>
+                  	<div class="form-group">
+                  		<label class="col-sm-12  control-label">Posibles enfermedades</label><br>
+                  		<ul class="enfermedad_posible">
+                  			<li class="hidden">nada</li>
+                  		</ul>           			
+                  	</div>                  	
                   	<div class="form-group">
                   		{{ Form::submit('Realizar Consulta' , array('class'=> 'btn btn-primary col-sm-offset-2')) }}
                   	</div>  
               {{ Form::close() }}
           </div>
   		</div><!-- col-lg-8 --> 
-  		<div class="col-lg-4">  			
+  		<div class="col-lg-4 computer">  			
 			<div class="row mt prediccion">
 				<div class="col-sm-12 text-center">
 					<label class="control-label">Activar Predicción de tratamiento</label>
@@ -60,7 +78,7 @@
 					</div>
 				</div>
 			</div>  
-			<div class="row mt">
+			<div class="row mt computer">
 				<div class="form-panel no-visible" id="cuadroprediccion">
 					<div class="cuadros">
 						
@@ -257,7 +275,45 @@
 		    </div>
 		</div>
 	</div>
-</div>    		
+</div> 
+
+{{-- modal sintomas --}}   		
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalsintomas">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
+      		</div>
+      		<div class="modal-body">
+      			<h3><i class="fa fa-angle-right"></i>Click en el sintoma para agregar</h3>  
+      			<?php $sintomas = Sintoma::all() ?>
+				<div class="form-panel">
+	      			<div class="row" id="add_sintoma">
+	      				@foreach($sintomas as $value)
+	      					<p class="col-sm-4 sintomas">{{ $value->sintoma }}</p>
+	      				@endforeach
+	      			</div>
+      			</div>
+      		</div>
+      	</div>
+    </div>
+</div>
+
+{{-- Modal tratamiento  --}}
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalsintomas">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
+      		</div>
+      		<div class="modal-body">
+      			<div class="hola"></div>      			
+      		</div>
+      	</div>
+    </div>
+</div>
 @stop
 @section('js')
 
@@ -267,19 +323,24 @@
 
 <script type="text/javascript">
 	$("#paciente").chosen()
-
+	
 	$('#sintomas_google').textcomplete([{
 	    match: /(^|\s)(\w{2,})$/,
 	    search: function (term, callback) {
-	        var words = ['tuberculosis', 'diabetes', 'asma', 'cardiopatias', 'tuberculosis','ematologicas', 'mentales', 'acrodisostosis', 'allgrove', 'sindrome', 'daltonismo', 'ectrodactilia', 'muscular'];
+	        var words = ['dolor','sindrome','alergia a alimentos', 'alergia a frutas', 'alergia a frutos secos', 'sinusitis', 'alfafetoproteína','calcitonina', 'cancer de Mama', 'melanoma', 'insulinas', 'pie diabético', 'Retinopatía Diabética', 'cocaína', 'actitud inicial de los padres', 'sospecha de problemas con drogas', 'laringitis', 'deshidratación', 'estreñimiento', 'hemorroides', 'varices', 'mareo', 'acné', 'ampollas', 'pecas', 'quemaduras', 'candidiasis', 'ladillas', 'sífilis', 'diarrea', 'dolor abdominal', 'estreñimiento', 'gastritis', 'neumonía', 'asma Bronquial', 'bronquitis','lesiones en el Deporte', 'dolor de Rodilla', 'pubalgia', 'afasia', 'angustia', 'bulimia', 'endodoncia', 'odontología estética', 'periodoncia', 'cirugía dental preprotésica'];
 	        callback($.map(words, function (word) {
 	            return word.indexOf(term) === 0 ? word : null;
 	        }));
 	    },
 	    replace: function (word) {
-	        return word + ' ';
+	    	enfermedad(word);
+	        return ' '+ word + ' ';
 	    }
 	}]);
+
+	function enfermedad(word){
+		//ajax
+	}
 </script> 
 
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>

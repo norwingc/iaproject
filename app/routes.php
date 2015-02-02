@@ -11,7 +11,8 @@
 |
 */
 Route::get('test', function(){
-	return $consultas = Consulta::all()->take(3);;
+	$tratamiento = Tratamiento::find(1);
+	return $tratamiento->descripcion;
 });
 Route::group(array('before' => 'auth'), function()
 {
@@ -56,6 +57,8 @@ Route::group(array('before' => 'auth'), function()
 			$consulta = Consulta::find($id);
 			return View::make('sistem.consulta.search')->with('consulta', $consulta);
 		});
+		Route::get('tratamiento/{tag}', 'ConsultasController@tratamiento');
+		Route::get('enfermedad/{tag}', 'ConsultasController@enfermedad');
 	});
 	
 	/**

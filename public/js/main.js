@@ -1,6 +1,10 @@
 $(document).ready(main);
 
 function main(){
+
+	$('.mobil').addClass("hidden-sm hidden-md hidden-lg");
+	$('.computer').addClass('hidden-xs');
+
 	$('.cedula').mask('000-000000-0000S');	
 
 
@@ -17,12 +21,12 @@ function main(){
 				alert('Debe de escribir los sintomas');
 				$('#cuadroprediccion').removeClass('si-visible');
 				$('#cuadroprediccion').addClass('no-visible');
-				$('#mostrarprediccion').html('Mostrar Preddiccion <i class="fa fa-chevron-circle-right"></i>');
+				$('#mostrarprediccion').html('Mostrar Ultimas Consultas <i class="fa fa-chevron-circle-right"></i>');
 				esta = false;
 			}else{
 				$('#cuadroprediccion').removeClass('no-visible');
 				$('#cuadroprediccion').addClass('si-visible');
-				$('#mostrarprediccion').html('<i class="fa fa-chevron-circle-left"></i> Ocultar Prediccion');
+				$('#mostrarprediccion').html('<i class="fa fa-chevron-circle-left"></i> Ocultar Consultas');
 				esta = true;
 				$.ajax({
 					type: 'GET',
@@ -51,7 +55,7 @@ function main(){
 		}else{
 			$('#cuadroprediccion').removeClass('si-visible');
 			$('#cuadroprediccion').addClass('no-visible');
-			$('#mostrarprediccion').html('Mostrar Preddiccion <i class="fa fa-chevron-circle-right"></i>');
+			$('#mostrarprediccion').html('Mostrar Ultimas Consultas <i class="fa fa-chevron-circle-right"></i>');
 			esta = false;
 		}
 	});
@@ -81,11 +85,23 @@ function main(){
 		}
 
 	});
+
+	
+	$('#add_sintoma p').each(function(){
+		$(this).click(function(){			
+			var sin = $('#sintomas_google').val();			 
+			sin += $(this).html()+ ' ';			
+			$('#sintomas_google').val(sin);					
+
+			$('#modalsintomas').modal('hide');
+		});
+	});
+
+	$('#tratamiento_sugerido').click(vertratamiento);
 }
 
 function ver(tratamiento){	
-	$('#tratamiento').val(tratamiento);
-	console.log(tratamiento);
+	$('#tratamiento').val(tratamiento);	
 }
 
 function addPaciente(){	
@@ -208,5 +224,47 @@ function upPaciente(){
             $('.errors_form').html(errors);
         }
 	});
+}
+
+function vertratamiento(){
+	var tag = $('#sintomas_google').val();
+
+	var tag = tag.split(',');
+
+	for (var i = 0; i < tag.length; i++) {
+
+		$.ajax({
+			type: 'GET',
+	    	url: 'consulta/tratamiento/'+tag[i],
+	    	beforeSend: function(){
+	           
+	        },
+	        success: function (data) {	        	
+	        	console.log(data.tratamiento.descripcion);	        	     	
+	        }
+		});
+
+		$.ajax({
+		type: 'GET',
+    	url: 'consulta/enfermedad/'+tag[i],
+    	beforeSend: function(){
+           
+        },
+        success: function (data) {
+        	var consulta = $('.enfermedad_posible').html();
+
+        	$('.enfermedad_posible li').each(function(){
+        		
+        		if($(this).html() == data.enfermedad.nombre || $(this).html() == 'nada'){
+        			alert('aqui ' +$(this).html());
+        		}else{
+        			alert('oo '+$(this).html());
+        			consulta += "<li>"+ data.enfermedad.nombre + "</li>";   
+        			$('.enfermedad_posible').html(consulta);  
+        		}        		  		
+        	});         	
+        }
+	});
+	}
 }
 

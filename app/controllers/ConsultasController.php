@@ -42,5 +42,46 @@ class ConsultasController extends BaseController {
 			return Redirect::back();
 		}	
 	}
+
+	/**
+	 * [tratamiento description]
+	 * @param  [type] $tag [description]
+	 * @return [type]      [description]
+	 */
+	public function tratamiento($tag){
+		if(Request::ajax()){	
+			$sintomas = Sintoma::where('sintoma', 'LIKE', '%'.trim($tag).'%')->first();
+
+			$tratamiento = Tratamiento::where('sintoma_id', $sintomas->id)->first();	
+
+		 	return Response::json(array(
+			 	'tratamiento' => $tratamiento
+	        ));
+		} 	
+	}
+
+	public function enfermedad($tag){
+		 if(Request::ajax()){	
+			$sintomas = Sintoma::where('sintoma', 'LIKE', '%'.trim($tag).'%')->first();
+
+			$enfermedad = Enfermedad::where('id', $sintomas->enfermedad_id)->first();	
+
+		 	return Response::json(array(
+			 	'enfermedad' => $enfermedad
+	        ));
+		} 	
+	}
+
+	/**
+	 * [multiexplode description]
+	 * @param  [type] $delimiters [description]
+	 * @param  [type] $string     [description]
+	 * @return [type]             [description]
+	 */
+	private function multiexplode ($delimiters,$string) {    
+	    $ready = str_replace($delimiters, $delimiters[0], $string);
+	    $launch = explode($delimiters[0], $ready);
+	    return  $launch;
+	}
 }
 ?>

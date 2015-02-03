@@ -39,7 +39,7 @@ Route::group(array('before' => 'auth'), function()
 		Route::post('save', 'ConsultasController@save');
 		Route::get('buscar/{tag}', function($tag){
 		    if(Request::ajax()){
-			 	$consultas = DB::table('consultas')->where('sintomas', 'LIKE', '%'.$tag.'%')->orderBy('id','des')->take(3)->get();
+			 	$consultas = DB::table('consultas')->where('sintomas', 'LIKE', '%'.trim($tag).'%')->orderBy('id','des')->take(3)->get();
 			 	return Response::json(array(
 				 	'consultas' =>     $consultas
 		        ));
@@ -50,7 +50,7 @@ Route::group(array('before' => 'auth'), function()
 			return View::make('sistem.consulta.consulta')->with('consultas', $consultas);
 		});
 		Route::post('view/tag', function(){
-			$consultas = Consulta::where('sintomas', 'LIKE', '%' .Input::get('q'). '%')->get();
+			$consultas = Consulta::where('sintomas', 'LIKE', '%' .trim(Input::get('q')). '%')->get();
 			return View::make('sistem.consulta.view',array('tag'=>Input::get('q'), 'consultas'=>$consultas));
 		});
 		Route::get('search/{id}', function($id){

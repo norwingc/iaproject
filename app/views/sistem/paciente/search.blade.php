@@ -31,7 +31,7 @@
 							<tr>
 								<td>{{ $doctor->nombre }}</td>
 								<td>{{ $value->sintomas }}</td>
-								<td>{{ $value->tratamiento }}</td>
+								<td>{{ substr($value->tratamiento, 0, 100); }}...</td>
 								<td><a href="{{ URL::to('consulta/search/'.$value->id) }}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> Ver Consulta</a></td>
 							</tr>
 			        	@endforeach

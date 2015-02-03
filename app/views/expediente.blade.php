@@ -60,8 +60,12 @@
 	 				<p class="subtitul">Atendido por el doctor: <span>{{ $doctor->nombre .' '. $doctor->apellido }} </span></p>		
 	 				<p class="subtitul">Sintomas</p>
 	 				<p>{{ $value->sintomas }}</p>
+	 				<p class="subtitul">Descripcion</p>
+	 				<p>{{ $value->descripcion }}</p>
 	 				<p class="subtitul">Tratamiento</p>
 	 				<p>{{ $value->tratamiento }}</p>
+	 				<p class="subtitul">Receta</p>
+	 				<p>{{ $value->receta }}</p>
 	 				<?php 
 						$fecha = $value->created_at;									
 					?> 

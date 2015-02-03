@@ -11,7 +11,9 @@ class ConsultasController extends BaseController {
 		$rules	= array(
 			'paciente' => 'required',
 			'sintomas' => 'required',
-			'tratamiento' => 'required',	
+			'descripcion' => 'required',
+			'tratamiento' => 'required',
+			'receta' => 'required',	
 			);
 		$message = array(
 			'required' => 'El campo :attribute es requerido',				
@@ -28,7 +30,9 @@ class ConsultasController extends BaseController {
 			$consulta->doctor_id = Auth::user()->id;
 			$consulta->paciente_id = Input::get('paciente');
 			$consulta->sintomas = Input::get('sintomas');
+			$consulta->descripcion = Input::get('descripcion');
 			$consulta->tratamiento = Input::get('tratamiento');
+			$consulta->receta = Input::get('receta');
 
 			$consulta_conocimiento = new ConsultaConocimiento();
 			$consulta_conocimiento->doctor_id = Auth::user()->id;
@@ -60,6 +64,11 @@ class ConsultasController extends BaseController {
 		} 	
 	}
 
+	/**
+	 * [enfermedad description]
+	 * @param  [type] $tag [description]
+	 * @return [type]      [description]
+	 */
 	public function enfermedad($tag){
 		 if(Request::ajax()){	
 			$sintomas = Sintoma::where('sintoma', 'LIKE', '%'.trim($tag).'%')->first();

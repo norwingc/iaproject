@@ -18,8 +18,7 @@
 	  	  	 	<table class="table table-hover" id="consultas">
 					<thead>
 			            <tr>
-			                <th>Paciente</th>
-			                <th>Apellido</th>
+			                <th>Paciente</th>			              
 			                <th>Cedula</th>			               	
 			               	<th>Sintomas</th>
 			               	<th>Tratamiento</th>
@@ -34,10 +33,9 @@
 							?>
 							<tr>
 								<td><a href="{{ URL::to('paciente/search/'. $paciente->id)}}" target="new">{{ $paciente->nombre }}</a> </td>
-								<td>{{ $paciente->apellido }}</td>
 								<td>{{ $paciente->cedula }}</td>
 								<td>{{ $value->sintomas }}</td>
-								<td>{{ $value->tratamiento }}</td>
+								<td>{{ substr($value->tratamiento, 0, 100); }}...</td>
 								<td><a href="{{ URL::to('consulta/search/'.$value->id) }}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> Ver</a></td>
 							</tr>
 			        	@endforeach

@@ -18,7 +18,9 @@
          	<div class="form-panel descripcion_consulta">
          		<p>Paciente Atendido por: <span>{{ $doctor->nombre . ' ' . $doctor->apellido }}</span></p>
          		<p>Sintomas presentado por el paciente: <span>{{ $consulta->sintomas }}</span></p>
+                <p>Descripcion de la consulta: <span>{{ $consulta->descripcion }}</span></p>
          		<p>Tratamiento brindado: <span>{{ $consulta->tratamiento }}</span></p>
+                <p>Receta: <span>{{ $consulta->receta }}</span></p>
          		<input type="hidden" value="{{ $consulta->tratamiento }}" id="tratamiento_descripcion">
          	</div>
          	<button class="btn btn-primary" id="add_tratamiento">Agregar tratamiento a la consulta actual</button>

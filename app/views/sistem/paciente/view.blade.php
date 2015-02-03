@@ -18,18 +18,20 @@
 	  	  	 	<table class="table table-hover" id="consultas">
 					<thead>
 			            <tr>
-			                <th>Nombre</th>
-			                <th>Apellido</th>
+			                <th>Nombre</th>			             
 			                <th>Cedula</th>
+			                <th>Sexo</th>
+			                <th>Edad</th>
 			               	<th>Acciones</th>
 			            </tr>
 			        </thead>
 			        <tbody>
 			        	@foreach($pacientes as $value)
 							<tr>
-								<td>{{ $value->nombre }}</td>
-								<td>{{ $value->apellido }}</td>
+								<td>{{ $value->nombre }}</td>							
 								<td>{{ $value->cedula }}</td>
+								<td>{{ $value->sexo }}</td>
+								<td>{{ $value->edad }}</td>
 								<td><a href="{{ URL::to('paciente/search/'.$value->id) }}" class="btn btn-success btn-xs"><i class="fa fa-check"></i> Ver</a></td>
 							</tr>
 			        	@endforeach

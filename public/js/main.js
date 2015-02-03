@@ -42,8 +42,8 @@ function main(){
 		            		var tratamiento = data.consultas[datos].tratamiento;
 
 		            		 consulta += "<div class='cuadro'>" + 
-		            		 				"<p>sintomas: " +  sintomas.slice(0,50) + "...</p>" +
-		            		 				"<p>tratamiento: " +  tratamiento.slice(0,50) + "...</p>" +
+		            		 				"<p>sintomas: <span>" +  sintomas.slice(0,50) + "...</span></p>" +
+		            		 				"<p>tratamiento: <span>" +  tratamiento.slice(0,50) + "...</span></p>" +
 		            		 				"<a href='"+ url +"'  target='new'>Leer mas..</a>"
 		            		 			 +"</div>";	
 		            	}
@@ -229,42 +229,54 @@ function upPaciente(){
 function vertratamiento(){
 	var tag = $('#sintomas_google').val();
 
-	var tag = tag.split(',');
+	if(tag == ''){
+		alert('Debe seleccionar los sintomas')
+	}else{
 
-	for (var i = 0; i < tag.length; i++) {
+		var tag = tag.split(',');
+		$('#hola').html('');
+		for (var i = 0; i < tag.length; i++) {
+			var texto = '';
+			$.ajax({
+				type: 'GET',
+		    	url: 'consulta/tratamiento/'+tag[i],
+		    	beforeSend: function(){
+		           
+		        },
+		        success: function (data) {	
+	        	
+	        		texto = $('#hola').html();
 
-		$.ajax({
-			type: 'GET',
-	    	url: 'consulta/tratamiento/'+tag[i],
-	    	beforeSend: function(){
-	           
-	        },
-	        success: function (data) {	        	
-	        	console.log(data.tratamiento.descripcion);	        	     	
-	        }
-		});
+	        		texto += "<div><p>"+ data.tratamiento.descripcion + "</p></div>";
 
-		$.ajax({
-		type: 'GET',
-    	url: 'consulta/enfermedad/'+tag[i],
-    	beforeSend: function(){
-           
-        },
-        success: function (data) {
-        	var consulta = $('.enfermedad_posible').html();
+	        		$('#hola').html(texto);
 
-        	$('.enfermedad_posible li').each(function(){
-        		
-        		if($(this).html() == data.enfermedad.nombre || $(this).html() == 'nada'){
-        			alert('aqui ' +$(this).html());
-        		}else{
-        			alert('oo '+$(this).html());
-        			consulta += "<li>"+ data.enfermedad.nombre + "</li>";   
-        			$('.enfermedad_posible').html(consulta);  
-        		}        		  		
-        	});         	
-        }
-	});
-	}
+	        		$('#modaltratamiento').modal('show');
+		        }
+			});
+
+			$.ajax({
+				type: 'GET',
+		    	url: 'consulta/enfermedad/'+tag[i],
+		    	beforeSend: function(){
+		           
+		        },
+		        success: function (data) {        	
+
+		        	$('.enfermedad_posible li').each(function(){ 
+		        		
+		        		if($(this).html() == data.enfermedad.nombre){
+
+		        		}else{
+		        			$('#quitar').remove();
+		        			var consulta = $('.enfermedad_posible').html();
+		        			consulta += "<li>"+ data.enfermedad.nombre + "</li>";   
+		        			$('.enfermedad_posible').html(consulta);  
+		        		}        		  		
+		        	});         	
+		        }
+			});
+		}
+	}	
 }
 

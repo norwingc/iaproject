@@ -18,7 +18,9 @@ class CreateConsultasTable extends Migration {
 			$table->integer('doctor_id');
 			$table->integer('paciente_id');
 			$table->string('sintomas');
+			$table->string('descripcion');
 			$table->string('tratamiento');
+			$table->string('receta');
 			$table->timestamps();
 		});
 	}

@@ -56,13 +56,19 @@
 	                    		<a class="btn btn-primary" data-toggle="modal" href="#" id="tratamiento_sugerido">Ver Tratamiento sugerido</a>
 	                    	</div>	 
               			</div> 
-                  	</div>
+                  	</div>                  	
+                  	<div class="form-group">
+                  		<label class="col-sm-2 control-label">Receta</label>
+              			<div class="col-sm-10">
+              				{{ Form::textarea('receta', Input::old('receta'), array('class' => 'form-control', 'placeholder'=> 'Receta del Paciente')) }}  	
+              			</div> 
+                  	</div>  
                   	<div class="form-group">
                   		<label class="col-sm-12  control-label">Posibles enfermedades</label><br>
                   		<ul class="enfermedad_posible">
-                  			<li class="hidden">nada</li>
+                  			<li class="hidden" id="quitar">nada</li>
                   		</ul>           			
-                  	</div>                  	
+                  	</div>                	
                   	<div class="form-group">
                   		{{ Form::submit('Realizar Consulta' , array('class'=> 'btn btn-primary col-sm-offset-2')) }}
                   	</div>  
@@ -301,15 +307,18 @@
 </div>
 
 {{-- Modal tratamiento  --}}
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalsintomas">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modaltratamiento">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
+		        <h4 class="modal-title" id="myModalLabel">Tratamiento para pacientes</h4>
       		</div>
       		<div class="modal-body">
-      			<div class="hola"></div>      			
+      			<div class="hola form-panel" id="hola">
+      				
+      				
+      			</div>      			
       		</div>
       	</div>
     </div>

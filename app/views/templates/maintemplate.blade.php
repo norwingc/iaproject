@@ -108,6 +108,12 @@
                           <li><a  href="{{ URl::to('usuarios/view') }}">Buscar</a></li>
                       </ul>                    
                   </li>
+                  <li>
+                      <a href="{{ URL::to('administrador') }}" >
+                          <i class="fa fa-lock"></i>
+                          <span>Administrador</span>
+                      </a>                      
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->

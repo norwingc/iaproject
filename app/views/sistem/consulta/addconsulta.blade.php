@@ -38,7 +38,7 @@
               			<div class="col-sm-10">
               				{{ Form::textarea('sintomas', Input::old('sintomas'), array('class' => 'form-control', 'placeholder'=> 'Sintomas del Paciente', 'id' =>'sintomas_google')) }}  	
               				<div style="text-align:right; margin-top: 10px">
-	                    		<a class="btn btn-primary" data-toggle="modal" href="#" data-target="#modalsintomas">Ver Todos Los sintomas</a>
+	                    		<a class="btn btn-primary" href="#" id="ver_sintomas">Ver Todos Los sintomas</a>
 	                    	</div>	
               			</div>              			
                   	</div>
@@ -273,7 +273,6 @@
 		    				{{ Form::text('deportes', Input::old('deportes'), array('class' => 'form-control', 'placeholder'=> 'Deportes', 'id'=>'deportes')) }}  
 		    			</div>
 		       		</div>
-
 		       		<div class="form-group" style="text-align:right; margin:0">
 				    	{{ Form::button('Agregar Paciente' , array('class'=> 'btn btn-primary', 'id'=>'addpaciente')) }}
 				    </div>
@@ -289,18 +288,23 @@
 		<div class="modal-content">
 			<div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
+		        <h4 class="modal-title" id="myModalLabel">Agregar Sintomas</h4>
       		</div>
       		<div class="modal-body">
-      			<h3><i class="fa fa-angle-right"></i>Click en el sintoma para agregar</h3>  
+      			<h3><i class="fa fa-angle-right"></i>Agregar Sintomas</h3>  
       			<?php $sintomas = Sintoma::all() ?>
 				<div class="form-panel">
 	      			<div class="row" id="add_sintoma">
 	      				@foreach($sintomas as $value)
-	      					<p class="col-sm-4 sintomas">{{ $value->sintoma }}</p>
+	      					<div class="col-md-4">
+	      						<input type="checkbox" value="{{ $value->sintoma }}">{{ $value->sintoma }}	      					
+	      					</div>
 	      				@endforeach
-	      			</div>
+	      			</div>				
       			</div>
+      			<div class="form-group" style="text-align:right; margin:0">
+      				<a href="#" class="btn btn-primary" id="addsintomas">Agregar sintomas</a>		    		
+			   	</div>
       		</div>
       	</div>
     </div>

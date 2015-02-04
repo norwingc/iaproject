@@ -117,6 +117,18 @@ Route::group(array('before' => 'auth'), function()
 		Route::post('update','UsuariosController@update');
 	});
 
+	/**
+	 * ADMINISTRADOR	
+	 */
+
+	Route::group(array('prefix' => 'administrador'), function () {
+		Route::get('/', function(){
+			return View::make('sistem.admin.admin');
+		});
+		Route::post('enfermedades/save','AdministradorController@save_enfermedad');
+		Route::post('sintomas/save','AdministradorController@save_sintomas');
+	});	
+
 });	
 
 Route::get('login', function(){

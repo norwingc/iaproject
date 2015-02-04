@@ -7,7 +7,7 @@ class ConsultasController extends BaseController {
 	 * @return [type] [description]
 	 */
 	public function save(){
-
+		
 		$rules	= array(
 			'paciente' => 'required',
 			'sintomas' => 'required',

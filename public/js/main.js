@@ -6,6 +6,7 @@ function main(){
 	$('.computer').addClass('hidden-xs');
 
 	$('.cedula').mask('000-000000-0000S');	
+	$('.numero').mask('000');	
 
 
 	$('#prediccion').change(function(){		
@@ -87,15 +88,27 @@ function main(){
 	});
 
 	
-	$('#add_sintoma p').each(function(){
-		$(this).click(function(){			
-			var sin = $('#sintomas_google').val();			 
-			sin += $(this).html()+ ' ';			
-			$('#sintomas_google').val(sin);					
+	$('#addsintomas').click(function(){
+		$('#add_sintoma input[type="checkbox"]').each(function(){
+			if($(this).is(':checked')){
+				var sin = $('#sintomas_google').val();
+				sin += $(this).val()+ ', ';			
+				$('#sintomas_google').val(sin);					
 
-			$('#modalsintomas').modal('hide');
+				$('#modalsintomas').modal('hide');
+				
+			}			
 		});
 	});
+
+	$('#ver_sintomas').click(function(){
+		$('#add_sintoma input[type="checkbox"]').each(function(){
+			$(this).attr('checked', false);
+		});
+		$('#modalsintomas').modal('show');
+	});
+	//modalsintomas
+	
 
 	$('#tratamiento_sugerido').click(vertratamiento);
 }
@@ -261,19 +274,22 @@ function vertratamiento(){
 		    	beforeSend: function(){
 		           
 		        },
-		        success: function (data) {        	
+		        success: function (data) {       
+		        	var flag = false; 	
 
-		        	$('.enfermedad_posible li').each(function(){ 
-		        		
+		        	$('.enfermedad_posible li').each(function(){ 		        		
 		        		if($(this).html() == data.enfermedad.nombre){
-
-		        		}else{
-		        			$('#quitar').remove();
-		        			var consulta = $('.enfermedad_posible').html();
-		        			consulta += "<li>"+ data.enfermedad.nombre + "</li>";   
-		        			$('.enfermedad_posible').html(consulta);  
+		        			flag = true;
+		        		}else{		        			
+		        			$('#quitar').remove();		        			
 		        		}        		  		
-		        	});         	
+		        	}); 
+
+		        	if(flag == false){
+		        		var consulta = $('.enfermedad_posible').html();
+	        			consulta += "<li>"+ data.enfermedad.nombre + "</li>";   
+	        			$('.enfermedad_posible').html(consulta);        	
+		        	} 		        	
 		        }
 			});
 		}

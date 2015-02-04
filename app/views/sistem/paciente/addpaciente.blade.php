@@ -24,7 +24,7 @@
 		    			</div>
 		    			<label class="col-sm-1 control-label">Edad</label>
 		    			<div class="col-sm-2">
-		    				{{ Form::number('edad', Input::old('edad'), array('class' => 'form-control', 'placeholder'=> 'Edad del Paciente','min' => '1', 'max' => '120', 'id'=>'edad')) }}  
+		    				{{ Form::text('edad', Input::old('edad'), array('class' => 'form-control numero', 'placeholder'=> 'Edad del Paciente', 'id'=>'edad')) }}  
 		    			</div>	
 		    			<label class="col-sm-1 control-label">Sexo</label>
 		    			<div class="col-sm-2">

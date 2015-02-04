@@ -102,12 +102,27 @@
 @stop
 @section('js')
 {{ HTML::script('js/zabuto_calendar.js') }}
-<script type="application/javascript">
-    $(document).ready(function () {        
-        $("#my-calendar").zabuto_calendar({
+<script type="application/javascript">	
+var eventData = [
+   {
+     "date": "2015-01-01",
+     "badge": false,
+     "title": "Example 1"
+   },
+   {
+     "date": "2015-01-02",
+     "badge": true,
+     "title": "Example 2"
+   }
+];
+    $(document).ready(function () {  
+	      
+    	$("#my-calendar").zabuto_calendar({
+    		data: eventData,
        		language: "es",
 			year: 2015,
 			today: true,
+			
     	});
      });	
 </script>

@@ -27,7 +27,7 @@
 	{{ HTML::style('css/style-responsive.css') }}  
   {{ HTML::style('css/zabuto_calendar.css ') }}  
   
-
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 
 
 </head>

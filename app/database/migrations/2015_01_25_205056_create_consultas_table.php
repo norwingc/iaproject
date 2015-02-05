@@ -21,6 +21,7 @@ class CreateConsultasTable extends Migration {
 			$table->string('descripcion');
 			$table->string('tratamiento');
 			$table->string('receta');
+			$table->string('proxima');
 			$table->timestamps();
 		});
 	}

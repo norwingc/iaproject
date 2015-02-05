@@ -53,23 +53,46 @@ class UsuariosController extends BaseController {
 	 * @return [type] [description]
 	 */
 	public function update(){
-		$user = User::where('id', Auth::user()->id)->first();
+		$rules	= array(
+			'username' => 'required',
+			'password' => 'required',
+			'email' => 'required',	
+			'nombre' => 'required',
+			'apellido' => 'required',
+			'direccion' => 'required',
+			'cargo' => 'required',
+			'g-recaptcha-response' => 'required|recaptcha',
+			);
+		$message = array(
+			'required' => 'El campo :attribute es requerido',	
+			'unique' => 'El :attribute ya esta en uso'			
+		);
 
-		$user->username = Input::get('username');
-		$user->password = Hash::make(Input::get('password'));
-		$user->email = Input::get('email');
+		$validate = Validator::make(Input::all(), $rules, $message);
 
-		$doctor = Doctor::where('usuario_id', $user->id)->first();
-		$doctor->nombre = Input::get('nombre');
-		$doctor->apellido = Input::get('apellido');
-		$doctor->direccion = Input::get('direccion');
-		$doctor->cargo = Input::get('cargo');
+		if($validate->fails()){
+			return Redirect::back()->withErrors($validate)->withInput();
+		}else{
+		
 
-		$user->save();
-		$user->usuariodoctor()->save($doctor);
+			$user = User::where('id', Auth::user()->id)->first();
 
-		Session::flash('message', 'Usuario Modificado');
-		return Redirect::back();
+			$user->username = Input::get('username');
+			$user->password = Hash::make(Input::get('password'));
+			$user->email = Input::get('email');
+
+			$doctor = Doctor::where('usuario_id', $user->id)->first();
+			$doctor->nombre = Input::get('nombre');
+			$doctor->apellido = Input::get('apellido');
+			$doctor->direccion = Input::get('direccion');
+			$doctor->cargo = Input::get('cargo');
+
+			$user->save();
+			$user->usuariodoctor()->save($doctor);
+
+			Session::flash('message', 'Usuario Modificado');
+			return Redirect::back();
+		}	
 
 	}
 }

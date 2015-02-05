@@ -54,6 +54,46 @@
 						<div class="title">Julio</div>
 						<div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
 					</div>
+				</div>
+				<div class="border-head">
+					<h3>Proximas Consultas</h3>
+					<?php 
+						$hoy = getdate(); 
+						$hoy = date("Y/m/d"); 
+						$consultas = Consulta::all();						
+					?>	
+					<style type="text/css">
+						.white-panel{
+							color: #2b82ad;
+						}
+					</style>		
+					@foreach($consultas as $value)	
+						<?php	
+							$fecha = $hoy > $value->proxima;							
+						?>	
+						@if($fecha == true)					
+							<div class="col-md-4 mb">					
+								<div class="white-panel pn">
+									<div class="white-header">
+							   			<h5 style="color:#424a5d">Consulta</h5>
+							 		</div>							 		
+							 		<p><b>Paciente</b></p>
+							 		<?php $paciente = Paciente::where('id', $value->paciente_id)->first() ?>
+							 		<p><b><a href="{{ URL::to('paciente/search/'. $paciente->id) }}">{{ $paciente->nombre }}</a></b></p>
+									<div class="row">
+										<div class="col-md-6">
+										    <p class="small mt" style="color:#424a5d">Ultima Consulta</p>
+										    <p><?php $ultima = $value->created_at; $ultima = date('Y-m-d')?>{{ $ultima }}</p>
+										</div>
+										<div class="col-md-6">
+									    	<p class="small mt" style="color:#424a5d">Proxima Consulta</p>
+									    	<p>{{ $value->proxima }}</p>
+									  	</div>
+									</div>
+								</div>
+							</div><!-- /col-md-4 -->
+						@endif	
+					@endforeach
 				</div>				
 			</div><!-- /row -->
 		</div><!-- /col-lg-9 END SECTION MIDDLE -->

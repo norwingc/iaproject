@@ -52,11 +52,17 @@
 		    			</div>	
 		       		</div>
 		       		<div class="form-group">
-		    			<label class="col-sm-2 col-sm-2 control-label">Cargo</label>
+		    			<label class="col-sm-2 control-label">Cargo</label>
 		    			<div class="col-sm-10">
 		    				{{ Form::text('cargo', Input::old('cargo') ? input::old() : $user->usuariodoctor->cargo, array('class' => 'form-control', 'placeholder'=> 'Cargo')) }}  
 		    			</div>	
 		       		</div>
+		       		<div class="form-group ">
+		       			<label class="col-sm-2 control-label">Recaptcha</label>
+		       			<div class="col-sm-10">
+		       				<div class="g-recaptcha" data-sitekey="6LcVjwETAAAAAKWhxKnX4i7tVvJK4yQIvVXrYrnJ"></div>
+		       			</div>
+		       		</div>	
 		       		<div class="modal-footer">
 				    	{{ Form::submit('Modificar Usuario' , array('class'=> 'btn btn-primary')) }}
 				    </div>

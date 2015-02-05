@@ -62,7 +62,13 @@
               			<div class="col-sm-10">
               				{{ Form::textarea('receta', Input::old('receta'), array('class' => 'form-control', 'placeholder'=> 'Receta del Paciente')) }}  	
               			</div> 
-                  	</div>  
+                  	</div>
+                  	<div class="form-group">
+                  		<label class="col-sm-2 control-label">Proxima Consulta</label>
+              			<div class="col-sm-10">
+              				{{ Form::input('date','proxima', Input::old('proxima'), array('class' => 'form-control')) }}  	
+              			</div> 
+                  	</div>    
                   	<div class="form-group">
                   		<label class="col-sm-12  control-label">Posibles enfermedades</label><br>
                   		<ul class="enfermedad_posible">

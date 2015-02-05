@@ -14,6 +14,7 @@ class ConsultasController extends BaseController {
 			'descripcion' => 'required',
 			'tratamiento' => 'required',
 			'receta' => 'required',	
+			'proxima' => 'required'
 			);
 		$message = array(
 			'required' => 'El campo :attribute es requerido',				
@@ -33,6 +34,7 @@ class ConsultasController extends BaseController {
 			$consulta->descripcion = Input::get('descripcion');
 			$consulta->tratamiento = Input::get('tratamiento');
 			$consulta->receta = Input::get('receta');
+			$consulta->proxima = Input::get('proxima');
 
 			$consulta_conocimiento = new ConsultaConocimiento();
 			$consulta_conocimiento->doctor_id = Auth::user()->id;

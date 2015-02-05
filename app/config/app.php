@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Thujohn\Pdf\PdfServiceProvider',
+		'Greggilbert\Recaptcha\RecaptchaServiceProvider'
 
 	),
 
